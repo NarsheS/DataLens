@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as XLSX from "xlsx";
 import analyzeData from "./services/analyzeData";
+import removeDuplicates from "./services/dataCleaner";
 
 import type { Row } from "./types/RowType";
 import type { FileStats } from "./types/FileStatsType";
@@ -25,16 +26,20 @@ function App() {
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
 
-    const jsonData = XLSX.utils.sheet_to_json<Row>(worksheet);
+    const jsonData = XLSX.utils.sheet_to_json<Row>(
+      worksheet
+    );
 
-    setData(jsonData);
+    // Analisa o arquivo original
+    const fileStats = analyzeData(jsonData);
 
-    const analysis = analyzeData(jsonData);
+    // Remove duplicados - desestruturação necessária
+    const { cleanedData } = removeDuplicates(jsonData);
 
-    setStats(analysis);
 
-    console.log(jsonData);
-    console.log(analysis);
+    setData(cleanedData);
+    setStats(fileStats);
+
   }
 
   return (
@@ -51,30 +56,21 @@ function App() {
         <section>
           <h2>Resumo do arquivo</h2>
 
-          <div>
-            <strong>{stats.rows}</strong>
-            <span> registros</span>
-          </div>
+          <p>Linhas: {stats.rows}</p>
 
-          <div>
-            <strong>{stats.columns}</strong>
-            <span> colunas</span>
-          </div>
+          <p>Colunas: {stats.columns}</p>
 
-          <div>
-            <strong>{stats.emptyCells}</strong>
-            <span> células vazias</span>
-          </div>
+          <p>
+            Duplicados: {stats.duplicatedRows}
+          </p>
 
-          <div>
-            <strong>{stats.duplicatedRows}</strong>
-            <span> registros duplicados</span>
-          </div>
+          <p>
+            Linhas únicas: {stats.uniqueRows}
+          </p>
 
-          <div>
-            <strong>{stats.uniqueRows}</strong>
-            <span> registros únicos</span>
-          </div>
+          <p>
+            Células vazias: {stats.emptyCells}
+          </p>
 
           <h3>Colunas</h3>
 

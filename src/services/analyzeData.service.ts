@@ -1,5 +1,5 @@
-import type { FileStats } from "../types/FileStatsType";
-import type { Row } from "../types/RowType";
+import type { FileStats } from "../types/FileStats.type";
+import type { Row } from "../types/Row.type";
 
 function analyzeData(data: Row[]): FileStats {
   const rows = data.length;

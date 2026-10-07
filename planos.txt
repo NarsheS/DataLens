@@ -1,35 +1,28 @@
-                    ┌──────────────────┐
-                    │ Usuário envia    │
-                    │ Excel / CSV      │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Leitura dos      │
-                    │ dados            │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Tratamento       │
-                    │ • duplicados     │
-                    │ • vazios        │
-                    │ • inconsistentes │
-                    │ • tipos          │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Análise          │
-                    │ automática       │
-                    └────────┬─────────┘
-                             │
-               ┌─────────────┴─────────────┐
-               ▼                           ▼
-       ┌──────────────┐             ┌──────────────┐
-       │ Dashboard    │             │ Exportações  │
-       │              │             │              │
-       │ 📊 Gráficos  │             │ CSV limpo    │
-       │ 📈 Métricas  │             │ PDF          │
-       │ 📋 Tabelas   │             │              │
-       └──────────────┘             └──────────────┘
+Arquivo
+   ↓
+Leitura
+   ↓
+Limpeza de duplicatas
+   ↓
+Análise das colunas
+   ↓
+Detectar possível estrutura "pivotável"
+   ↓
+Mostrar ao usuário o que foi detectado
+   ↓
+Usuário confirma/configura
+   ↓
+Reorganizar dados
+   ↓
+Construtor de gráfico
+
+1. Ler arquivo                  ✅
+2. Analisar arquivo             ✅
+3. Remover duplicatas           ✅
+4. Analisar cada coluna         ✅
+5. Detectar estrutura           ← agora
+6. Sugerir reorganização
+7. Usuário confirma/ajusta
+8. Reorganizar dados
+9. Mostrar dados resultantes
+10. Só então construir gráficos

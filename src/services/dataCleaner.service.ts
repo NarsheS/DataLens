@@ -1,4 +1,4 @@
-import type { Row } from "../types/RowType";
+import type { Row } from "../types/Row.type";
 
 // remove duplicatas do arquivo
 function removeDuplicates(data: Row[]): {

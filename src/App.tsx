@@ -16,43 +16,21 @@ import {
   Table2,
   Upload,
 } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { Header, Footer, StatCard } from "./components";
 
-import analyzeData from "./services/analyzeData.service";
-import removeDuplicates from "./services/dataCleaner.service";
-import analyzeColumns from "./services/analyzeColumns.service";
-import detectStructure from "./services/detectStructure.service";
-import reorganizeData from "./services/reorganizeData.service";
+import type { ColumnInfo, DataStructure, FileStats, Row } from "./types";
+import {
+  analyzeData,
+  removeDuplicates,
+  analyzeColumns,
+  detectStructure,
+  reorganizeData,
+  formatNumber
+} from "./services";
 
-import type { Row } from "./types/Row.type";
-import type { FileStats } from "./types/FileStats.type";
-import type { ColumnInfo } from "./types/ColumnInfo.type";
-import type { DataStructure } from "./types/DataStructure.type";
+import { Labels, Styles } from "./utils";
 
-const numberFormatter = new Intl.NumberFormat("pt-BR");
-
-const typeLabels: Record<ColumnInfo["type"], string> = {
-  text: "Texto",
-  number: "Numérico",
-  date: "Data",
-  boolean: "Booleano",
-  mixed: "Misto",
-  unknown: "Indefinido",
-};
-
-const typeStyles: Record<ColumnInfo["type"], string> = {
-  text: "bg-blue-50 text-blue-700 ring-blue-600/20",
-  number: "bg-violet-50 text-violet-700 ring-violet-600/20",
-  date: "bg-amber-50 text-amber-700 ring-amber-600/20",
-  boolean: "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
-  mixed: "bg-orange-50 text-orange-700 ring-orange-600/20",
-  unknown: "bg-slate-100 text-slate-600 ring-slate-500/20",
-};
-
-function formatNumber(value: number) {
-  return numberFormatter.format(value);
-}
 
 function App() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -63,9 +41,7 @@ function App() {
   const [reorganizedData, setReorganizedData] = useState<Row[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [columnTitles, setColumnTitles] = useState<Record<string, string>>(
-    {}
-  );
+  const [columnTitles, setColumnTitles] = useState<Record<string, string>>({});
   const [fileName, setFileName] = useState("");
   const [cleanedRows, setCleanedRows] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -249,29 +225,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-4 sm:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex size-11 items-center justify-center rounded-xl bg-violet-600 text-white shadow-sm shadow-violet-200">
-              <Database className="size-6" />
-            </div>
-
-            <div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-950">
-                DataLens
-              </h1>
-              <p className="text-xs text-slate-500">
-                Análise e transformação de dados
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 sm:flex">
-            <span className="size-2 rounded-full bg-emerald-500" />
-            Processamento local
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-[1440px] space-y-8 px-5 py-8 sm:px-8 sm:py-10">
         <section className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
@@ -500,10 +454,10 @@ function App() {
 
                       <span
                         className={`shrink-0 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-                          typeStyles[column.type]
+                          Styles[column.type]
                         }`}
                       >
-                        {typeLabels[column.type]}
+                        {Labels[column.type]}
                       </span>
                     </div>
 
@@ -813,53 +767,14 @@ function App() {
           </>
         )}
 
-        <footer className="flex flex-col justify-between gap-2 border-t border-slate-200 py-5 text-xs text-slate-400 sm:flex-row sm:items-center">
-          <p>
-            <span className="font-semibold text-slate-500">DataLens</span>
-            {" "}— Análise e transformação de dados.
-          </p>
-          <p>Feito para tornar dados mais fáceis de entender.</p>
-        </footer>
+        <Footer />
       </main>
     </div>
   );
 }
 
-type StatCardProps = {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  description: string;
-  iconClass: string;
-};
 
-function StatCard({
-  icon,
-  label,
-  value,
-  description,
-  iconClass,
-}: StatCardProps) {
-  return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-sm font-medium text-slate-500">{label}</p>
-          <p className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
-            {value}
-          </p>
-        </div>
 
-        <div className={`flex size-11 items-center justify-center rounded-xl ${iconClass}`}>
-          {icon}
-        </div>
-      </div>
 
-      <p className="mt-4 border-t border-slate-100 pt-3 text-xs leading-5 text-slate-500">
-        {description}
-      </p>
-    </article>
-  );
-}
 
 export default App;

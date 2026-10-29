@@ -1,3 +1,2 @@
-export { default as Footer } from "./Footer";
-export { default as Header } from "./Header";
-export { default as StatCard } from "./StatCard";
+export { default as Footer } from "./dashboard/Footer";
+export { default as Header } from "./dashboard/Header";

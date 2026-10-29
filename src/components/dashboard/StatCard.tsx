@@ -1,12 +1,20 @@
-import type { StatCardProps } from "../types";
+import type { ReactNode } from "react";
 
-const StatCard = ({
+export type StatCardProps = {
+  icon: ReactNode;
+  label: string;
+  value: string;
+  description: string;
+  iconClass: string;
+};
+
+function StatCard({
   icon,
   label,
   value,
   description,
   iconClass,
-}: StatCardProps) => {
+}: StatCardProps) {
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
@@ -16,12 +24,12 @@ const StatCard = ({
             {value}
           </p>
         </div>
-
-        <div className={`flex size-11 items-center justify-center rounded-xl ${iconClass}`}>
+        <div
+          className={`flex size-11 items-center justify-center rounded-xl ${iconClass}`}
+        >
           {icon}
         </div>
       </div>
-
       <p className="mt-4 border-t border-slate-100 pt-3 text-xs leading-5 text-slate-500">
         {description}
       </p>
@@ -29,4 +37,4 @@ const StatCard = ({
   );
 }
 
-export default StatCard
+export default StatCard;

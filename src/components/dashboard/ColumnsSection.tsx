@@ -1,14 +1,12 @@
 import type { ColumnInfo } from "../../types";
 import { Labels, Styles } from "../../utils";
+import { formatNumber } from "../../services";
 
 type ColumnsSectionProps = {
   columns: ColumnInfo[];
 };
 
-const numberFormatter = new Intl.NumberFormat("pt-BR");
-const formatNumber = (value: number) => numberFormatter.format(value);
-
-function ColumnsSection({ columns }: ColumnsSectionProps) {
+const ColumnsSection = ({ columns }: ColumnsSectionProps) => {
   return (
     <section className="space-y-4">
       <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">

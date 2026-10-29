@@ -1,20 +1,12 @@
-import type { ReactNode } from "react";
+import type { StatCardProps } from "../../types";
 
-export type StatCardProps = {
-  icon: ReactNode;
-  label: string;
-  value: string;
-  description: string;
-  iconClass: string;
-};
-
-function StatCard({
+const StatCard = ({
   icon,
   label,
   value,
   description,
   iconClass,
-}: StatCardProps) {
+}: StatCardProps) => {
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between gap-3">

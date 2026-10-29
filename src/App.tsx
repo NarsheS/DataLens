@@ -9,7 +9,6 @@ import {
   Rows3,
 } from "lucide-react";
 
-import { Header, Footer } from "./components";
 import {
   HeroSection,
   ImportCard,
@@ -19,6 +18,9 @@ import {
   ColumnsSection,
   StructureCard,
   ReorganizedTable,
+  ChartSection,
+  Header,
+  Footer,
 } from "./components/dashboard";
 
 import {
@@ -229,6 +231,10 @@ function App() {
             <ColumnsSection columns={columns} />
 
             {structure && <StructureCard structure={structure} />}
+
+            {reorganizedData.length > 0 && (
+              <ChartSection data={reorganizedData} />
+            )}
 
             {hasReorganizedData ? (
               <ReorganizedTable

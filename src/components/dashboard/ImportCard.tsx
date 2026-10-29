@@ -1,22 +1,15 @@
-import type { ChangeEvent, RefObject } from "react";
 import { FileSpreadsheet, Upload } from "lucide-react";
 import { Button } from "../ui/button";
+import type { ImportCardProps } from "../../types";
 
-type ImportCardProps = {
-  fileInputRef: RefObject<HTMLInputElement | null>;
-  fileName: string;
-  isLoading: boolean;
-  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChooseFile: () => void;
-};
 
-function ImportCard({
+const ImportCard = ({
   fileInputRef,
   fileName,
   isLoading,
   onFileChange,
   onChooseFile,
-}: ImportCardProps) {
+}: ImportCardProps) => {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
       <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">

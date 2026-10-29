@@ -1,23 +1,9 @@
-import type { ReactNode } from "react";
-import type { FileStats } from "../../types";
 import StatCard from "./StatCard";
+import { formatNumber } from "../../services";
+import type { StatsSectionProps } from "../../types";
 
-type StatsSectionProps = {
-  stats: FileStats;
-  cleanedRows: number;
-  icons: {
-    rows: ReactNode;
-    columns: ReactNode;
-    unique: ReactNode;
-    empty: ReactNode;
-    success: ReactNode;
-  };
-};
 
-const numberFormatter = new Intl.NumberFormat("pt-BR");
-const formatNumber = (value: number) => numberFormatter.format(value);
-
-function StatsSection({ stats, cleanedRows, icons }: StatsSectionProps) {
+const StatsSection = ({ stats, cleanedRows, icons }: StatsSectionProps) => {
   return (
     <section className="space-y-4">
       <div>

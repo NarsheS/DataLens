@@ -6,3 +6,6 @@ export { default as StatsSection } from "./StatsSection";
 export { default as ColumnsSection } from "./ColumnsSection";
 export { default as StructureCard } from "./StructureCard";
 export { default as ReorganizedTable } from "./ReorganizedTable";
+export { default as ChartSection } from "./ChartSection";
+export { default as Header } from "./Header";
+export { default as Footer } from "./Footer";

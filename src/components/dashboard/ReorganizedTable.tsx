@@ -1,23 +1,10 @@
 import { useMemo } from "react";
 import { ChevronLeft, ChevronRight, Download, Table2 } from "lucide-react";
 import { Button } from "../ui/button";
-import type { Row } from "../../types";
+import { formatNumber } from "../../services";
+import type { ReorganizedTableProps } from "../../types"
 
-type ReorganizedTableProps = {
-  data: Row[];
-  columnTitles: Record<string, string>;
-  onColumnTitleChange: (column: string, title: string) => void;
-  onExport: () => void;
-  currentPage: number;
-  pageSize: number;
-  onPageChange: (page: number) => void;
-  onPageSizeChange: (size: number) => void;
-};
-
-const numberFormatter = new Intl.NumberFormat("pt-BR");
-const formatNumber = (value: number) => numberFormatter.format(value);
-
-function ReorganizedTable({
+const ReorganizedTable = ({
   data,
   columnTitles,
   onColumnTitleChange,
@@ -26,7 +13,7 @@ function ReorganizedTable({
   pageSize,
   onPageChange,
   onPageSizeChange,
-}: ReorganizedTableProps) {
+}: ReorganizedTableProps) => {
   const originalColumns = useMemo(
     () => Object.keys(data[0] ?? {}),
     [data],

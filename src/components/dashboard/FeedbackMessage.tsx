@@ -1,13 +1,7 @@
-import type { ReactNode } from "react";
+import type { FeedbackMessageProps } from "../../types";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 
-type FeedbackMessageProps = {
-  message: string;
-  variant: "error" | "notice";
-  icon?: ReactNode;
-};
-
-function FeedbackMessage({ message, variant, icon }: FeedbackMessageProps) {
+const FeedbackMessage = ({ message, variant, icon }: FeedbackMessageProps) => {
   if (!message) return null;
 
   const isError = variant === "error";

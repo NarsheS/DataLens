@@ -1,12 +1,9 @@
 import { FileSpreadsheet, Upload } from "lucide-react";
 import { Button } from "../ui/button";
+import type { GeneralStateProps } from "../../types";
 
-type EmptyStateProps = {
-  onImport: () => void;
-  isLoading: boolean;
-};
 
-function EmptyState({ onImport, isLoading }: EmptyStateProps) {
+const EmptyState = ({ onImport, isLoading }: GeneralStateProps) => {
   return (
     <section className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center sm:py-20">
       <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">

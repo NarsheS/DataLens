@@ -1,12 +1,9 @@
 import { Sparkles, Upload } from "lucide-react";
 import { Button } from "../ui/button";
+import type { GeneralStateProps } from "../../types";
 
-type HeroSectionProps = {
-  onImport: () => void;
-  isLoading: boolean;
-};
 
-function HeroSection({ onImport, isLoading }: HeroSectionProps) {
+const HeroSection = ({ onImport, isLoading }: GeneralStateProps) => {
   return (
     <section className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
       <div className="max-w-2xl">
